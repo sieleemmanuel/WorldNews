@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/dashboard">
+
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="com.siele.worldnews.ui.Dashboard"
+        android:label="@string/news_label"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboard_to_newsDetail"
+            app:destination="@id/newsDetail" />
+        <action
+            android:id="@+id/action_dashboard_to_bookmark"
+            app:destination="@id/bookmark" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetail"
+        android:name="com.siele.worldnews.ui.NewsDetail"
+        android:label="@string/news_detail_label"
+        tools:layout="@layout/fragment_news_detail" >
+        <argument
+            android:name="article"
+            app:argType="com.siele.worldnews.model.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookmark"
+        android:name="com.siele.worldnews.ui.Bookmark"
+        android:label="@string/action_bookmark_title"
+        tools:layout="@layout/fragment_bookmark" >
+        <action
+            android:id="@+id/action_bookmark_to_newsDetail"
+            app:destination="@id/newsDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.siele.worldnews.ui.Settings"
+        android:label="Settings"/>
+    <fragment
+        android:id="@+id/newsCategoryHeadlines"
+        android:name="com.siele.worldnews.ui.NewsCategoryHeadlines"
+        android:label="fragment_news_category_headlines"
+        tools:layout="@layout/fragment_news_category_headlines" >
+        <action
+            android:id="@+id/action_newsCategoryHeadlines_to_newsDetail"
+            app:destination="@id/newsDetail" />
+    </fragment>
+</navigation>

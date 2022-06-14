@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">World News</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!--Tab titles-->
+    <string name="all_news_label">All News</string>
+    <string name="business_label">Business</string>
+    <string name="sports_label">Sports</string>
+    <string name="tech_label">Technology</string>
+    <string name="entertainment_label">Entertainment</string>
+    <string name="health_label">Health</string>
+    <string name="science_label">Entertainment</string>
+
+    <string name="headline_image_description">News headline preview image</string>
+    <string name="content_description_article_image">Article image content description</string>
+    <string name="action_share_title">Share</string>
+    <string name="action_bookmark_title">Bookmark</string>
+    <string name="news_detail_label">News Details</string>
+    <string name="news_label">The News</string>
+    <string name="latest_news_label">Latest News</string>
+    <string name="bookmark_content_description">bookmark article</string>
+    <string name="ellapsed_time_label">25 minutes ago</string>
+    <string name="article_title_hint">News Headline Header Will Go Or Goes Here</string>
+    <string name="settings_label">Settings</string>
+    <string name="dashboard_label">Dashboard</string>
+</resources>
