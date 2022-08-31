@@ -18,9 +18,8 @@
         <ImageView
             android:id="@+id/imgArticlePreview"
             android:layout_width="110dp"
-            android:layout_height="match_parent"
+            android:layout_height="125dp"
             android:contentDescription="@string/content_description_article_image"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +29,8 @@
             android:id="@+id/tvArticleTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="2"
@@ -38,11 +38,10 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvNewsCategory"
-            app:layout_constraintTop_toBottomOf="@+id/tvNewsCategory" />
+            app:layout_constraintStart_toEndOf="@+id/imgArticlePreview"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tvNewsCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,18 +52,18 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imgArticlePreview"
             app:layout_constraintTop_toTopOf="@+id/imgArticlePreview" />
-
+-->
         <TextView
             android:id="@+id/tvEllapsedTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ellapsed_time_label"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBookmark"
             app:layout_constraintStart_toStartOf="@+id/tvArticleTitle"
-            app:layout_constraintTop_toTopOf="@+id/imageButton" />
+            app:layout_constraintTop_toTopOf="@+id/btnBookmark" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btnBookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -72,8 +71,8 @@
             android:minWidth="48dp"
             android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvArticleTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvArticleTitle"
-            app:srcCompat="@drawable/ic_bookmark" />
+            app:srcCompat="@drawable/ic_bookmarked" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

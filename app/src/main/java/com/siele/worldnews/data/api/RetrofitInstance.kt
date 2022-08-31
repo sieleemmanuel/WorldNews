@@ -1,4 +1,4 @@
-package com.siele.worldnews.api
+package com.siele.worldnews.data.api
 
 import com.siele.worldnews.utils.Constants
 import okhttp3.OkHttpClient

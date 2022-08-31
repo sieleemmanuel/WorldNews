@@ -1,11 +1,15 @@
 package com.siele.worldnews.di
 
-import com.siele.worldnews.api.NewsApi
-import com.siele.worldnews.api.RetrofitInstance
-import com.siele.worldnews.repository.NewsRepository
+import android.content.Context
+import com.siele.worldnews.data.api.NewsApi
+import com.siele.worldnews.data.api.RetrofitInstance
+import com.siele.worldnews.data.database.NewsDao
+import com.siele.worldnews.data.database.NewsDatabase
+import com.siele.worldnews.data.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -19,5 +23,19 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(newsApi: NewsApi): NewsRepository =  NewsRepository(newsApi)
+    fun provideRepository(newsApi: NewsApi, newsDao: NewsDao): NewsRepository =  NewsRepository(newsApi, newsDao)
+
+    @Singleton
+    @Provides
+    fun provideNewsDatabase(@ApplicationContext context: Context):NewsDatabase {
+        return NewsDatabase.getInstance(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNewsDao(newsDatabase: NewsDatabase):NewsDao {
+        return newsDatabase.newsDao
+    }
+
+
 }

@@ -11,7 +11,7 @@
         tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/actionBookmark"
-        android:icon="@drawable/ic_bookmark"
+        android:icon="@drawable/ic_bookmarked"
         android:title="@string/action_bookmark_title"
-        app:showAsAction="always|withText" />
+        app:showAsAction="always" />
 </menu>

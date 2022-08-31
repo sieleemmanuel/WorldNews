@@ -5,14 +5,19 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1675" />
         <entry key="app/src/main/res/drawable/ic_bookmark.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/ic_bookmark_selector.xml" value="0.1385" />
+        <entry key="app/src/main/res/drawable/image_placeholder.xml" value="0.1495" />
+        <entry key="app/src/main/res/drawable/loading_animation.xml" value="0.1495" />
+        <entry key="app/src/main/res/drawable/loading_progressbar.xml" value="0.1495" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/fragment_bookmark.xml" value="0.21145833333333333" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_news_category_headlines.xml" value="0.1361111111111111" />
         <entry key="app/src/main/res/layout/fragment_news_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/preview_article_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/top_headline_item.xml" value="0.1361111111111111" />
+        <entry key="app/src/main/res/layout/top_headline_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/menu/news_detail_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/dp_8"
     android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_8"
     app:cardCornerRadius="10dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -19,6 +20,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:scaleType="centerCrop"
+            app:tint="#66000000"
+            android:tintMode="src_over"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:contentDescription="@string/headline_image_description"/>
         <TextView
@@ -32,6 +35,8 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:maxLines="3"
+            android:ellipsize="end"
             app:layout_constraintBottom_toTopOf="@+id/tvHeadlineDate"
             app:layout_constraintEnd_toEndOf="@+id/imgHeadline"
             app:layout_constraintStart_toStartOf="@+id/imgHeadline" />
@@ -59,6 +64,6 @@
             app:tint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgHeadline"
-            app:srcCompat="@drawable/ic_bookmark" />
+            app:srcCompat="@drawable/ic_bookmarked" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -24,7 +24,8 @@
         tools:layout="@layout/fragment_news_detail" >
         <argument
             android:name="article"
-            app:argType="com.siele.worldnews.model.Article" />
+            app:argType="com.siele.worldnews.data.model.Article"
+            app:nullable="true"/>
     </fragment>
     <fragment
         android:id="@+id/bookmark"

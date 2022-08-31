@@ -1,4 +1,4 @@
-package com.siele.worldnews.model
+package com.siele.worldnews.data.model
 
 data class NewsResponse(
     val articles: List<Article>,

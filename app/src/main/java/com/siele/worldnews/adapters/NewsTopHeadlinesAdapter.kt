@@ -1,16 +1,27 @@
 package com.siele.worldnews.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.request.RequestOptions
+import com.siele.worldnews.R
 import com.siele.worldnews.databinding.TopHeadlineItemBinding
-import com.siele.worldnews.model.Article
+import com.siele.worldnews.data.model.Article
 
-class NewsTopHeadlinesAdapter(val headlineClickListener: HeadlineClickListener,val context: Context):ListAdapter<Article, NewsTopHeadlinesAdapter.HeadlineViewHolder>(DiffUtilItem) {
+class NewsTopHeadlinesAdapter(
+    val headlineClickListener: HeadlineClickListener,
+    val viewListener: ViewClickListener,
+    val context: Context
+    ):ListAdapter<Article, NewsTopHeadlinesAdapter.HeadlineViewHolder>(DiffUtilItem) {
+    private val TAG = NewsTopHeadlinesAdapter::class.simpleName
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeadlineViewHolder {
         val binding = TopHeadlineItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return HeadlineViewHolder(binding)
@@ -22,12 +33,23 @@ class NewsTopHeadlinesAdapter(val headlineClickListener: HeadlineClickListener,v
     }
 
     inner class HeadlineViewHolder(private val binding: TopHeadlineItemBinding): RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("CheckResult")
         fun bind(topArticle: Article){
             binding.apply {
-                Glide.with(context).load(topArticle.urlToImage).into(imgHeadline)
+                val options = RequestOptions()
+                    .centerCrop()
+                    .placeholder(R.drawable.loading_progressbar)
+                    .error(R.drawable.image_placeholder)
+                    .priority(Priority.HIGH)
+
+                Glide.with(context).load(topArticle.urlToImage).apply(options).into(imgHeadline)
                 tvHeadline.text = topArticle.title
                 tvHeadlineDate.text = topArticle.publishedAt
+                btnHeadlineBookmark.setOnClickListener {
+                    viewListener.onHeadlineViewClicked(topArticle, it)
+                }
                 root.setOnClickListener {
+                    Log.d(TAG, "bind: $topArticle")
                     headlineClickListener.onHeadlineClicked(topArticle)
                 }
             }
@@ -45,6 +67,10 @@ class NewsTopHeadlinesAdapter(val headlineClickListener: HeadlineClickListener,v
     }
     class HeadlineClickListener(val headlineListener:(article:Article)->Unit){
         fun onHeadlineClicked(article: Article) = headlineListener(article)
+    }
+
+    class ViewClickListener(val viewListener:(article:Article, view:View)->Unit){
+        fun onHeadlineViewClicked(article: Article, view: View) = viewListener(article, view)
     }
 
 }

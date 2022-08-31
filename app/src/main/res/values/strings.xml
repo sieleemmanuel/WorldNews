@@ -24,7 +24,7 @@
     <string name="tech_label">Technology</string>
     <string name="entertainment_label">Entertainment</string>
     <string name="health_label">Health</string>
-    <string name="science_label">Entertainment</string>
+    <string name="science_label">Science</string>
 
     <string name="headline_image_description">News headline preview image</string>
     <string name="content_description_article_image">Article image content description</string>
@@ -38,4 +38,11 @@
     <string name="article_title_hint">News Headline Header Will Go Or Goes Here</string>
     <string name="settings_label">Settings</string>
     <string name="dashboard_label">Dashboard</string>
+    <string name="key_health">key_health</string>
+    <string name="key_entertainment">key_entertainment</string>
+    <string name="key_sports">key_sports</string>
+    <string name="key_science">key_science</string>
+    <string name="key_tech">key_tech</string>
+    <string name="key_business">key_business</string>
+    <string name="key_all_news">key_all_news</string>
 </resources>
