@@ -8,9 +8,9 @@ import com.google.android.material.internal.Experimental
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
-@Entity(tableName = "articles_db_table")
+@Entity(tableName = "bookmark_table")
 @Parcelize
-data class Article(
+data class BookmarkArticle(
     @PrimaryKey(autoGenerate = true)
     val id:Int? = null,
     val isBookmarked:Boolean? = false,

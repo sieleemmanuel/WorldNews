@@ -2,6 +2,7 @@ package com.siele.worldnews.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.siele.worldnews.R
 import com.siele.worldnews.databinding.TopHeadlineItemBinding
 import com.siele.worldnews.data.model.Article
+import com.siele.worldnews.utils.GetElapsedTime
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
 
 class NewsTopHeadlinesAdapter(
     val headlineClickListener: HeadlineClickListener,
@@ -35,6 +40,9 @@ class NewsTopHeadlinesAdapter(
     inner class HeadlineViewHolder(private val binding: TopHeadlineItemBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("CheckResult")
         fun bind(topArticle: Article){
+
+            val elapsedSecs = GetElapsedTime.getElapsedTime(topArticle)
+
             binding.apply {
                 val options = RequestOptions()
                     .centerCrop()
@@ -44,7 +52,13 @@ class NewsTopHeadlinesAdapter(
 
                 Glide.with(context).load(topArticle.urlToImage).apply(options).into(imgHeadline)
                 tvHeadline.text = topArticle.title
-                tvHeadlineDate.text = topArticle.publishedAt
+                tvHeadlineDate.text = if ((elapsedSecs/3600)>=1){
+                    binding.root.context.getString(R.string.hours_format,(elapsedSecs/3600).toInt())
+                }else if((elapsedSecs/60)>=1){
+                    binding.root.context.getString(R.string.hours_format,(elapsedSecs/60).toInt())
+                }else{
+                    binding.root.context.getString(R.string.about_a_minute)
+                }
                 btnHeadlineBookmark.setOnClickListener {
                     viewListener.onHeadlineViewClicked(topArticle, it)
                 }
@@ -55,6 +69,7 @@ class NewsTopHeadlinesAdapter(
             }
         }
     }
+
     object DiffUtilItem:DiffUtil.ItemCallback<Article>(){
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.title == oldItem.title

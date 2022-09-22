@@ -16,6 +16,8 @@ interface NewsApi {
         language:String = "en",
         @Query("category")
         category:String = "",
+        @Query("page")
+        page:Int = 1,
         @Query("apiKey")
         apiKey:String = Constants.API_KEY
     ):Response<NewsResponse>

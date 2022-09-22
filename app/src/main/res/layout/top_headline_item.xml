@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/imgHeadline"
             android:layout_width="230dp"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,22 +24,24 @@
             android:tintMode="src_over"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:contentDescription="@string/headline_image_description"/>
-        <TextView
-            android:id="@+id/tvHeadline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="This is News preview headline which goes here and there"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:maxLines="3"
-            android:ellipsize="end"
-            app:layout_constraintBottom_toTopOf="@+id/tvHeadlineDate"
-            app:layout_constraintEnd_toEndOf="@+id/imgHeadline"
-            app:layout_constraintStart_toStartOf="@+id/imgHeadline" />
+
+                <TextView
+                    android:id="@+id/tvHeadline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="This is News preview headline which goes here and there"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tvHeadlineDate"
+                    app:layout_constraintEnd_toEndOf="@+id/imgHeadline"
+                    app:layout_constraintStart_toStartOf="@+id/imgHeadline"
+                    app:layout_constraintTop_toBottomOf="@+id/btnHeadlineBookmark" />
 
         <TextView
             android:id="@+id/tvHeadlineDate"

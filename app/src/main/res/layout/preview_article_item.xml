@@ -57,7 +57,7 @@
             android:id="@+id/tvEllapsedTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ellapsed_time_label"
+            android:text="@string/elapsed_time_label"
             app:layout_constraintBottom_toBottomOf="@+id/btnBookmark"
             app:layout_constraintStart_toStartOf="@+id/tvArticleTitle"
             app:layout_constraintTop_toTopOf="@+id/btnBookmark" />

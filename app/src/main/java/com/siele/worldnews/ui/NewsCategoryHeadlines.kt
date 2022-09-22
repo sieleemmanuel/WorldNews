@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.siele.worldnews.R
 import com.siele.worldnews.adapters.ArticlePreviewAdapter
 import com.siele.worldnews.adapters.NewsTopHeadlinesAdapter
+import com.siele.worldnews.data.model.BookmarkArticle
 import com.siele.worldnews.databinding.FragmentNewsCategoryHeadlinesBinding
 import com.siele.worldnews.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,6 +64,7 @@ class NewsCategoryHeadlines : Fragment() {
                 when {
                     allNews == getString(R.string.all_news_label).lowercase() -> {
                         mainViewModel.topGeneralNews.observe(viewLifecycleOwner){
+                            Log.d(TAG, "onCreateView: $it")
                             if (it!=null){
                                 binding.pbLoadingTopHeadlines.visibility = View.INVISIBLE
                             }
@@ -171,7 +174,22 @@ class NewsCategoryHeadlines : Fragment() {
         }else{
             (imgBtn as ImageButton).imageTintList = resources.getColorStateList(R.color.purple_200)
         }
-        mainViewModel.bookmarkAnArticle(article)
+        mainViewModel.bookmarkAnArticle((article as BookmarkArticle))
+    }
+
+    fun filterHeadlines(query: String?) {
+        mainViewModel.getSearchedNews(query!!)
+        mainViewModel.searchedNews.observe(viewLifecycleOwner){
+            if (it!=null) {
+                if (it.articles.isEmpty()) {
+                    Toast.makeText(requireContext(), "No match found", Toast.LENGTH_SHORT).show()
+                    headlinesAdapter.submitList(null)
+                } else {
+                    headlinesAdapter.submitList(null)
+                    headlinesAdapter.submitList(it.articles)
+                }
+            }
+        }
     }
 }
 

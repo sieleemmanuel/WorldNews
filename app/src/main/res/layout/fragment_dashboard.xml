@@ -27,8 +27,9 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newsListLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
@@ -86,8 +87,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/vpNewsHeadline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/vpNewsHeadline"
-                app:layout_constraintTop_toTopOf="@+id/vpNewsHeadline" />
--->
+                app:layout_constraintTop_toTopOf="@+id/vpNewsHeadline" />-->
             <TextView
                 android:id="@+id/tvLatestNews"
                 android:layout_width="wrap_content"
@@ -120,8 +120,25 @@
                 app:layout_constraintEnd_toEndOf="@id/rvLatestNews"
                 app:layout_constraintStart_toStartOf="@+id/rvLatestNews"
                 app:layout_constraintTop_toTopOf="@+id/rvLatestNews" />
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearchedNews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/preview_article_item"
+               />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

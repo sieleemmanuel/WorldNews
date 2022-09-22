@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.activityViewModels
@@ -18,7 +17,9 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.request.RequestOptions
 import com.siele.worldnews.R
 import com.siele.worldnews.data.model.Article
+import com.siele.worldnews.data.model.BookmarkArticle
 import com.siele.worldnews.databinding.FragmentNewsDetailBinding
+import com.siele.worldnews.utils.GetElapsedTime
 import com.siele.worldnews.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,8 +44,10 @@ class NewsDetail : Fragment() {
                 .placeholder(R.drawable.loading_progressbar)
                 .error(R.drawable.image_placeholder)
                 .priority(Priority.HIGH)
-
-            Glide.with(requireContext()).load(article.urlToImage!!).apply(options).into(imageViewArticle)
+            if(article.urlToImage!=null) {
+                Glide.with(requireContext()).load(article.urlToImage).apply(options)
+                    .into(imageViewArticle)
+            }
             setUpToolbar(appBarConfiguration)
             webView.apply {
                 webViewClient = ArticleWebViewClient()
@@ -59,12 +62,19 @@ class NewsDetail : Fragment() {
     ) {
         newsDetailToolbar.apply {
             setupWithNavController(findNavController(), appBarConfiguration)
-            title = "2 hours ago"
 
-            setOnMenuItemClickListener {  menuItem ->
+            val elapsedTimeInSec = GetElapsedTime.getElapsedTime(article)
+            title =if ((elapsedTimeInSec/3600)>=1){
+                binding.root.context.getString(R.string.hours_format,(elapsedTimeInSec/3600).toInt())
+            }else if((elapsedTimeInSec/60)>=1){
+                binding.root.context.getString(R.string.hours_format,(elapsedTimeInSec/60).toInt())
+            }else{
+                binding.root.context.getString(R.string.about_a_minute)
+            }
+                setOnMenuItemClickListener {  menuItem ->
                  when(menuItem.itemId){
                     R.id.actionBookmark ->{
-                        mainViewModel.bookmarkAnArticle(article = article)
+                        mainViewModel.bookmarkAnArticle(bookmarkArticle = article)
                         true
                     }
                      R.id.actionShare ->{

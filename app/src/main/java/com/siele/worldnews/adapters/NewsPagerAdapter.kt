@@ -65,4 +65,10 @@ class NewsPagerAdapter constructor(
             }
         }
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+
 }

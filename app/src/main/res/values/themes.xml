@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
 
         <!-- Customize your theme here. -->
     </style>
@@ -21,9 +21,14 @@
     <style name="MainToolbarStyle" parent="Theme.WorldNews">
         <item name="android:textColorSecondary">@color/white</item>
         <item name="toolbarStyle">@style/ToolbarStyling</item>
+        <item name="backgroundColor">?attr/colorPrimary</item>
     </style>
     <style name="ToolbarStyling" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleCentered">false</item>
         <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="Theme.WorldNews.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay.v14.Material">
+        <item name="android:layout">@layout/fragment_settings</item>
     </style>
 </resources>

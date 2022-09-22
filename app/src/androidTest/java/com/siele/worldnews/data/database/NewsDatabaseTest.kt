@@ -1,7 +1,6 @@
 package com.siele.worldnews.data.database
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,14 +18,14 @@ import org.junit.runner.RunWith
 internal class NewsDatabaseTest:TestCase(){
 
     private lateinit var articleDb:NewsDatabase
-    private lateinit var articleDao:NewsDao
+    private lateinit var articleDao:BookmarkDao
     private val TAG = NewsDatabaseTest::class.simpleName
 
     @Before
     public override fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         articleDb = Room.inMemoryDatabaseBuilder(context,NewsDatabase::class.java).build()
-        articleDao = articleDb.newsDao
+        articleDao = articleDb.bookmarkDao
     }
 
     @Test

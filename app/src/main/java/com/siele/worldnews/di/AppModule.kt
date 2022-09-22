@@ -3,8 +3,10 @@ package com.siele.worldnews.di
 import android.content.Context
 import com.siele.worldnews.data.api.NewsApi
 import com.siele.worldnews.data.api.RetrofitInstance
-import com.siele.worldnews.data.database.NewsDao
+import com.siele.worldnews.data.database.BookmarkDao
 import com.siele.worldnews.data.database.NewsDatabase
+import com.siele.worldnews.data.database.RemoteKeysDao
+import com.siele.worldnews.data.repository.NewsMediator
 import com.siele.worldnews.data.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
@@ -23,7 +25,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(newsApi: NewsApi, newsDao: NewsDao): NewsRepository =  NewsRepository(newsApi, newsDao)
+    fun provideRepository(newsApi: NewsApi, newsDatabase: NewsDatabase, newsMediator: NewsMediator): NewsRepository =  NewsRepository(newsApi, newsDatabase, newsMediator)
 
     @Singleton
     @Provides
@@ -33,9 +35,20 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNewsDao(newsDatabase: NewsDatabase):NewsDao {
-        return newsDatabase.newsDao
+    fun provideNewsDao(newsDatabase: NewsDatabase):BookmarkDao {
+        return newsDatabase.bookmarkDao
     }
 
+    @Singleton
+    @Provides
+    fun provideRemoteKeysDao(newsDatabase: NewsDatabase):RemoteKeysDao {
+        return newsDatabase.remoteKeysDao
+    }
+
+    @Singleton
+    @Provides
+    fun provideNewsMediator(newsDatabase: NewsDatabase, newsApi: NewsApi):NewsMediator {
+        return NewsMediator(newsApi, newsDatabase)
+    }
 
 }

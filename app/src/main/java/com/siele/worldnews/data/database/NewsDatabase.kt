@@ -3,11 +3,14 @@ package com.siele.worldnews.data.database
 import android.content.Context
 import androidx.room.*
 import com.siele.worldnews.data.model.Article
+import com.siele.worldnews.data.model.RemoteKeys
 
-@Database(entities = [Article::class], version = 1, exportSchema = false)
+@Database(entities = [Article::class, RemoteKeys::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class NewsDatabase : RoomDatabase() {
-    abstract val newsDao: NewsDao
+    abstract val articlesDao: ArticlesDao
+    abstract val remoteKeysDao: RemoteKeysDao
+    abstract val bookmarkDao: BookmarkDao
 
     companion object {
         @Volatile

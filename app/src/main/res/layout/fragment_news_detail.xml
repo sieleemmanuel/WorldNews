@@ -18,13 +18,15 @@
                 app:expandedTitleTextColor="@color/white"
                 app:collapsedTitleTextColor="@color/white"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                app:contentScrim="@android:color/transparent">
+                app:contentScrim="?attr/colorPrimary">
 
                 <ImageView
                     android:id="@+id/imageViewArticle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
+                    app:tint="#79000000"
+                    android:tintMode="src_over"
                     tools:src="@tools:sample/backgrounds/scenic"
                     android:contentDescription="@string/content_description_article_image" />
 
@@ -32,7 +34,6 @@
                     android:id="@+id/newsDetailToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
-                    android:background="@android:color/transparent"
                     app:layout_collapseMode="pin"
                     app:title="2 hours ago"
                     app:titleTextColor="@color/white"

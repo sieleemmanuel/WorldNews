@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.siele.worldnews.data.model.Article
+import com.siele.worldnews.data.model.BookmarkArticle
 import com.siele.worldnews.data.model.NewsResponse
 import com.siele.worldnews.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -140,12 +143,8 @@ class MainViewModel @Inject constructor(private val newsRepository: NewsReposito
         }
     }
 
-    fun getLatestNews(country: String) {
-        viewModelScope.launch {
-            newsRepository.getLatest(country).collect { response ->
-                _latestNews.postValue(response.body())
-            }
-        }
+    fun getLatestNews(): Flow<PagingData<Article>> {
+        return newsRepository.getStreamArticlesFromDb()
     }
 
     fun getSearchedNews(query: String) {
@@ -156,21 +155,33 @@ class MainViewModel @Inject constructor(private val newsRepository: NewsReposito
         }
     }
 
-    fun getBookmarkedNews() =newsRepository.getBookmarks()
+    fun getBookmarkedNews() = newsRepository.getBookmarks()
 
-    fun bookmarkAnArticle(article: Article) {
-
-            newsRepository.articleIsBookmarked(article.title!!).observeForever {
+    fun bookmarkAnArticle(bookmarkArticle: BookmarkArticle) {
                 viewModelScope.launch {
-                if (it) {
-                    newsRepository.deleteBookmarked(article.title)
+                if (newsRepository.articleIsBookmarked(bookmarkArticle.title!!)) {
+                    newsRepository.deleteBookmarked(bookmarkArticle.title)
                 }else{
-                    newsRepository.insertBookmarks(article)
+                    newsRepository.insertBookmarks(bookmarkArticle)
                 }
-            }
-
         }
     }
-    fun isArticleInBookmark(article: Article) =  newsRepository.articleIsBookmarked(article.title!!)
 
+    fun bookmarkAnArticle(article: Article, isBookmarked:Boolean) {
+        viewModelScope.launch {
+                newsRepository.bookmarkArticle(article, isBookmarked)
+        }
+    }
+    fun isArticleInBookmark(article: Article): Boolean? {
+        val bookmarked = MutableLiveData(false)
+        viewModelScope.launch {
+           bookmarked.postValue(newsRepository.articleIsBookmarked(article.title!!))
+        }
+        return bookmarked.value
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }

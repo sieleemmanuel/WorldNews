@@ -41,7 +41,6 @@ class Bookmark : Fragment() {
         newsArticleAdapter = ArticlePreviewAdapter(
             articleClickListener(),
             viewClickListener(),
-            bookmarkListener(),
             requireContext())
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.apply {
@@ -51,11 +50,9 @@ class Bookmark : Fragment() {
             }
             bookmarkToolbar.setupWithNavController(findNavController(),appBarConfiguration)
         }
-
-            Toast.makeText(requireContext(), "${it.size}", Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "onViewCreated: $it")
+            val bookmarks = it.filter { article ->  article.isBookmarked==true }
             newsArticleAdapter.submitList(null)
-            newsArticleAdapter.submitList(it)
+            newsArticleAdapter.submitList(bookmarks)
         }
     }
 
@@ -65,22 +62,10 @@ class Bookmark : Fragment() {
     @SuppressLint("UseCompatLoadingForColorStateLists")
     @Suppress("DEPRECATION")
     private fun viewClickListener()= ArticlePreviewAdapter.ViewClickListener { imgBtn, article ->
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            imgBtn.imageTintList = resources.getColorStateList(R.color.purple_200, null)
+        if (article.isBookmarked == true){
+            mainViewModel.bookmarkAnArticle(article, false)
         }else{
-            imgBtn.imageTintList = resources.getColorStateList(R.color.purple_200)
+            mainViewModel.bookmarkAnArticle(article, true)
         }
-        mainViewModel.bookmarkAnArticle(article)
-    }
-
-    private fun bookmarkListener() = ArticlePreviewAdapter.BookmarkListener{ binding, article ->
-        mainViewModel.isArticleInBookmark(article).observe(viewLifecycleOwner){
-            if (it){
-                binding.btnBookmark.setImageResource(R.drawable.ic_bookmarked)
-            }else{
-                binding.btnBookmark.setImageResource(R.drawable.ic_bookmark)
-            }
-        }
-
     }
 }
